@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
 	darkMode: ["class"],
@@ -54,20 +55,22 @@ export default {
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+					foreground: 'hsl(var(--sidebar-foreground))'
 				}
 			},
+      fontFamily: {
+        sans: ['Arial', 'sans-serif', ...defaultTheme.fontFamily.sans],
+      },
 			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+        DEFAULT: '0.375rem', /* PRD default: "rounded-md" (Tailwind's 'md' size) */
+				lg: 'var(--radius)', /* 0.5rem, from CSS --radius */
+				md: 'calc(var(--radius) - 2px)', /* 0.375rem, effectively "rounded-md" */
+				sm: 'calc(var(--radius) - 4px)' /* 0.25rem, effectively "rounded" for buttons */
 			},
+      boxShadow: {
+        DEFAULT: '0 1px 2px 0 rgb(0 0 0 / 0.05)', /* PRD default: "shadow-sm" */
+        sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',    /* Tailwind's 'shadow-sm' explicit value */
+      },
 			keyframes: {
 				'accordion-down': {
 					from: {
@@ -92,5 +95,5 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [require("tailwindcss-animate")]
 } satisfies Config;
